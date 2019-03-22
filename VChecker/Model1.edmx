@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="EntrySet" EntityType="Model1.Store.EntrySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReferencesSet" EntityType="Model1.Store.ReferencesSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VulnerableSoftwareListSet" EntityType="Model1.Store.VulnerableSoftwareListSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VulnerableConfigurationSet1" EntityType="Model1.Store.VulnerableConfigurationSet1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogicalTest1Set" EntityType="Model1.Store.LogicalTest1Set" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NvdSet" EntityType="Model1.Store.NvdSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReferenceSet" EntityType="Model1.Store.ReferenceSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductSet" EntityType="Model1.Store.ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FactRef2Set" EntityType="Model1.Store.FactRef2Set" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LogicalTest2Set" EntityType="Model1.Store.LogicalTest2Set" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FactRef1Set" EntityType="Model1.Store.FactRef1Set" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EntryReferences" Association="Model1.Store.EntryReferences">
+      <End Role="Entry" EntitySet="EntrySet" />
+      <End Role="References" EntitySet="ReferencesSet" />
+    </AssociationSet>
+    <AssociationSet Name="NvdEntry" Association="Model1.Store.NvdEntry">
+      <End Role="Nvd" EntitySet="NvdSet" />
+      <End Role="Entry" EntitySet="EntrySet" />
+    </AssociationSet>
+    <AssociationSet Name="VulnerablesoftwarelistProduct" Association="Model1.Store.VulnerablesoftwarelistProduct">
+      <End Role="Vulnerablesoftwarelist" EntitySet="VulnerableSoftwareListSet" />
+      <End Role="Product" EntitySet="ProductSet" />
+    </AssociationSet>
+    <AssociationSet Name="ReferencesReference" Association="Model1.Store.ReferencesReference">
+      <End Role="References" EntitySet="ReferencesSet" />
+      <End Role="Reference" EntitySet="ReferenceSet" />
+    </AssociationSet>
+    <AssociationSet Name="EntryVulnerableconfiguration" Association="Model1.Store.EntryVulnerableconfiguration">
+      <End Role="Entry" EntitySet="EntrySet" />
+      <End Role="Vulnerableconfiguration" EntitySet="VulnerableConfigurationSet1" />
+    </AssociationSet>
+    <AssociationSet Name="EntryVulnerablesoftwarelist" Association="Model1.Store.EntryVulnerablesoftwarelist">
+      <End Role="Entry" EntitySet="EntrySet" />
+      <End Role="Vulnerablesoftwarelist" EntitySet="VulnerableSoftwareListSet" />
+    </AssociationSet>
+    <AssociationSet Name="Logicaltest1Name1" Association="Model1.Store.Logicaltest1Name1">
+      <End Role="Logicaltest1" EntitySet="LogicalTest1Set" />
+      <End Role="Name1" EntitySet="FactRef1Set" />
+    </AssociationSet>
+    <AssociationSet Name="Logicaltest1Logicaltest2" Association="Model1.Store.Logicaltest1Logicaltest2">
+      <End Role="Logicaltest1" EntitySet="LogicalTest1Set" />
+      <End Role="Logicaltest2" EntitySet="LogicalTest2Set" />
+    </AssociationSet>
+    <AssociationSet Name="Logicaltest2Factref" Association="Model1.Store.Logicaltest2Factref">
+      <End Role="Logicaltest2" EntitySet="LogicalTest2Set" />
+      <End Role="Factref" EntitySet="FactRef2Set" />
+    </AssociationSet>
+    <AssociationSet Name="VulnerableconfigurationLogicaltest1" Association="Model1.Store.VulnerableconfigurationLogicaltest1">
+      <End Role="Vulnerableconfiguration" EntitySet="VulnerableConfigurationSet1" />
+      <End Role="Logicaltest1" EntitySet="LogicalTest1Set" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EntrySet">
+    <Key>
+      <PropertyRef Name="EntryId" />
+    </Key>
+    <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Summary" Type="nvarchar" Nullable="true" MaxLength="3000" />
+    <Property Name="LastmodifiedDateTime" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="PublishedDateTime" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="NvdId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReferencesSet">
+    <Key>
+      <PropertyRef Name="ReferencesId" />
+    </Key>
+    <Property Name="ReferencesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lang" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ReferenceType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Source" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VulnerableSoftwareListSet">
+    <Key>
+      <PropertyRef Name="VulnerableSoftwareListId" />
+    </Key>
+    <Property Name="VulnerableSoftwareListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VulnerableConfigurationSet1">
+    <Key>
+      <PropertyRef Name="VulnerableConfigurationId" />
+    </Key>
+    <Property Name="VulnerableConfigurationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LogicalTest1Set">
+    <Key>
+      <PropertyRef Name="LogicalTest1Id" />
+    </Key>
+    <Property Name="LogicalTest1Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Negate1" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Operator1" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="VulnerableConfigurationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NvdSet">
+    <Key>
+      <PropertyRef Name="NvdId" />
+    </Key>
+    <Property Name="NvdId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PubDate" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ReferenceSet">
+    <Key>
+      <PropertyRef Name="ReferenceId" />
+    </Key>
+    <Property Name="ReferenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Href" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Lang" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Text" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="ReferencesId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductSet">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductN" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="VulnerableSoftwareListId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FactRef2Set">
+    <Key>
+      <PropertyRef Name="FactRef2Id" />
+    </Key>
+    <Property Name="FactRef2Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="LogicalTest2Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogicalTest2Set">
+    <Key>
+      <PropertyRef Name="LogicalTest2Id" />
+    </Key>
+    <Property Name="LogicalTest2Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Negate2" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Operator2" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LogicalTest1Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FactRef1Set">
+    <Key>
+      <PropertyRef Name="FactRed1Id" />
+    </Key>
+    <Property Name="FactRed1Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="LogicalTest1Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EntryReferences">
+    <End Role="Entry" Type="Model1.Store.EntrySet" Multiplicity="1" />
+    <End Role="References" Type="Model1.Store.ReferencesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entry">
+        <PropertyRef Name="EntryId" />
+      </Principal>
+      <Dependent Role="References">
+        <PropertyRef Name="EntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NvdEntry">
+    <End Role="Nvd" Type="Model1.Store.NvdSet" Multiplicity="1" />
+    <End Role="Entry" Type="Model1.Store.EntrySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nvd">
+        <PropertyRef Name="NvdId" />
+      </Principal>
+      <Dependent Role="Entry">
+        <PropertyRef Name="NvdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VulnerablesoftwarelistProduct">
+    <End Role="Vulnerablesoftwarelist" Type="Model1.Store.VulnerableSoftwareListSet" Multiplicity="1" />
+    <End Role="Product" Type="Model1.Store.ProductSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vulnerablesoftwarelist">
+        <PropertyRef Name="VulnerableSoftwareListId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="VulnerableSoftwareListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReferencesReference">
+    <End Role="References" Type="Model1.Store.ReferencesSet" Multiplicity="1" />
+    <End Role="Reference" Type="Model1.Store.ReferenceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="References">
+        <PropertyRef Name="ReferencesId" />
+      </Principal>
+      <Dependent Role="Reference">
+        <PropertyRef Name="ReferencesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EntryVulnerableconfiguration">
+    <End Role="Entry" Type="Model1.Store.EntrySet" Multiplicity="1" />
+    <End Role="Vulnerableconfiguration" Type="Model1.Store.VulnerableConfigurationSet1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entry">
+        <PropertyRef Name="EntryId" />
+      </Principal>
+      <Dependent Role="Vulnerableconfiguration">
+        <PropertyRef Name="EntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EntryVulnerablesoftwarelist">
+    <End Role="Entry" Type="Model1.Store.EntrySet" Multiplicity="1" />
+    <End Role="Vulnerablesoftwarelist" Type="Model1.Store.VulnerableSoftwareListSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entry">
+        <PropertyRef Name="EntryId" />
+      </Principal>
+      <Dependent Role="Vulnerablesoftwarelist">
+        <PropertyRef Name="EntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Logicaltest1Name1">
+    <End Role="Logicaltest1" Type="Model1.Store.LogicalTest1Set" Multiplicity="1" />
+    <End Role="Name1" Type="Model1.Store.FactRef1Set" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logicaltest1">
+        <PropertyRef Name="LogicalTest1Id" />
+      </Principal>
+      <Dependent Role="Name1">
+        <PropertyRef Name="LogicalTest1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Logicaltest1Logicaltest2">
+    <End Role="Logicaltest1" Type="Model1.Store.LogicalTest1Set" Multiplicity="1" />
+    <End Role="Logicaltest2" Type="Model1.Store.LogicalTest2Set" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logicaltest1">
+        <PropertyRef Name="LogicalTest1Id" />
+      </Principal>
+      <Dependent Role="Logicaltest2">
+        <PropertyRef Name="LogicalTest1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Logicaltest2Factref">
+    <End Role="Logicaltest2" Type="Model1.Store.LogicalTest2Set" Multiplicity="1" />
+    <End Role="Factref" Type="Model1.Store.FactRef2Set" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logicaltest2">
+        <PropertyRef Name="LogicalTest2Id" />
+      </Principal>
+      <Dependent Role="Factref">
+        <PropertyRef Name="LogicalTest2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VulnerableconfigurationLogicaltest1">
+    <End Role="Vulnerableconfiguration" Type="Model1.Store.VulnerableConfigurationSet1" Multiplicity="1" />
+    <End Role="Logicaltest1" Type="Model1.Store.LogicalTest1Set" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vulnerableconfiguration">
+        <PropertyRef Name="VulnerableConfigurationId" />
+      </Principal>
+      <Dependent Role="Logicaltest1">
+        <PropertyRef Name="VulnerableConfigurationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EntrySet" EntityType="Model1.Entry" />
+          <EntitySet Name="ReferencesSet" EntityType="Model1.References" />
+          <EntitySet Name="VulnerableSoftwareListSet" EntityType="Model1.VulnerableSoftwareList" />
+          <EntitySet Name="VulnerableConfigurationSet1" EntityType="Model1.VulnerableConfiguration" />
+          <EntitySet Name="LogicalTest1Set" EntityType="Model1.LogicalTest1" />
+          <AssociationSet Name="EntryReferences" Association="Model1.EntryReferences">
+            <End EntitySet="EntrySet" Role="Entry" />
+            <End EntitySet="ReferencesSet" Role="References" />
+          </AssociationSet>
+          <EntitySet Name="NvdSet" EntityType="Model1.Nvd" />
+          <AssociationSet Name="NvdEntry" Association="Model1.NvdEntry">
+            <End Role="Nvd" EntitySet="NvdSet" />
+            <End Role="Entry" EntitySet="EntrySet" />
+          </AssociationSet>
+          <EntitySet Name="ReferenceSet" EntityType="Model1.Reference" />
+          <EntitySet Name="ProductSet" EntityType="Model1.Product" />
+          <AssociationSet Name="VulnerablesoftwarelistProduct" Association="Model1.VulnerablesoftwarelistProduct">
+            <End EntitySet="VulnerableSoftwareListSet" Role="Vulnerablesoftwarelist" />
+            <End EntitySet="ProductSet" Role="Product" />
+          </AssociationSet>
+          <AssociationSet Name="ReferencesReference" Association="Model1.ReferencesReference">
+            <End Role="References" EntitySet="ReferencesSet" />
+            <End Role="Reference" EntitySet="ReferenceSet" />
+          </AssociationSet>
+          <EntitySet Name="FactRef2Set" EntityType="Model1.FactRef2" />
+          <AssociationSet Name="EntryVulnerableconfiguration" Association="Model1.EntryVulnerableconfiguration">
+            <End Role="Entry" EntitySet="EntrySet" />
+            <End Role="Vulnerableconfiguration" EntitySet="VulnerableConfigurationSet1" />
+          </AssociationSet>
+          <AssociationSet Name="EntryVulnerablesoftwarelist" Association="Model1.EntryVulnerablesoftwarelist">
+            <End Role="Entry" EntitySet="EntrySet" />
+            <End Role="Vulnerablesoftwarelist" EntitySet="VulnerableSoftwareListSet" />
+          </AssociationSet>
+          <EntitySet Name="LogicalTest2Set" EntityType="Model1.LogicalTest2" />
+          <EntitySet Name="FactRef1Set" EntityType="Model1.FactRef1" />
+          <AssociationSet Name="Logicaltest1Name1" Association="Model1.Logicaltest1Name1">
+            <End EntitySet="LogicalTest1Set" Role="Logicaltest1" />
+            <End EntitySet="FactRef1Set" Role="Name1" />
+          </AssociationSet>
+          <AssociationSet Name="Logicaltest1Logicaltest2" Association="Model1.Logicaltest1Logicaltest2">
+            <End EntitySet="LogicalTest1Set" Role="Logicaltest1" />
+            <End EntitySet="LogicalTest2Set" Role="Logicaltest2" />
+          </AssociationSet>
+          <AssociationSet Name="Logicaltest2Factref" Association="Model1.Logicaltest2Factref">
+            <End EntitySet="LogicalTest2Set" Role="Logicaltest2" />
+            <End EntitySet="FactRef2Set" Role="Factref" />
+          </AssociationSet>
+          <AssociationSet Name="VulnerableconfigurationLogicaltest1" Association="Model1.VulnerableconfigurationLogicaltest1">
+            <End Role="Vulnerableconfiguration" EntitySet="VulnerableConfigurationSet1" />
+            <End Role="Logicaltest1" EntitySet="LogicalTest1Set" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="EntryId" />
+          </Key>
+          <Property Name="EntryId" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="50" />
+          <Property Name="Summary" Type="String" Nullable="true" MaxLength="3000" />
+          <Property Name="LastmodifiedDateTime" Type="String" Nullable="true" MaxLength="50" />
+          <Property Name="PublishedDateTime" Type="String" MaxLength="50" Nullable="true" />
+          <NavigationProperty Name="References" Relationship="Model1.EntryReferences" FromRole="Entry" ToRole="References" />
+          <NavigationProperty Name="Nvd" Relationship="Model1.NvdEntry" FromRole="Entry" ToRole="Nvd" />
+          <Property Name="NvdId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="VulnerableConfiguration" Relationship="Model1.EntryVulnerableconfiguration" FromRole="Entry" ToRole="Vulnerableconfiguration" />
+          <NavigationProperty Name="VulnerableSoftwareList" Relationship="Model1.EntryVulnerablesoftwarelist" FromRole="Entry" ToRole="Vulnerablesoftwarelist" />
+        </EntityType>
+        <EntityType Name="References">
+          <Key>
+            <PropertyRef Name="ReferencesId" />
+          </Key>
+          <Property Name="ReferencesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Lang" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="ReferenceType" Type="String" MaxLength="50" Nullable="true" />
+          <NavigationProperty Name="Entry" Relationship="Model1.EntryReferences" FromRole="References" ToRole="Entry" />
+          <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Source" Type="String" MaxLength="50" Nullable="true" />
+          <NavigationProperty Name="Reference" Relationship="Model1.ReferencesReference" FromRole="References" ToRole="Reference" />
+        </EntityType>
+        <EntityType Name="VulnerableSoftwareList">
+          <Key>
+            <PropertyRef Name="VulnerableSoftwareListId" />
+          </Key>
+          <Property Name="VulnerableSoftwareListId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Model1.VulnerablesoftwarelistProduct" FromRole="Vulnerablesoftwarelist" ToRole="Product" />
+          <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerablesoftwarelist" FromRole="Vulnerablesoftwarelist" ToRole="Entry" />
+          <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VulnerableConfiguration">
+          <Key>
+            <PropertyRef Name="VulnerableConfigurationId" />
+          </Key>
+          <Property Name="VulnerableConfigurationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerableconfiguration" FromRole="Vulnerableconfiguration" ToRole="Entry" />
+          <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="LogicalTest1" Relationship="Model1.VulnerableconfigurationLogicaltest1" FromRole="Vulnerableconfiguration" ToRole="Logicaltest1" />
+        </EntityType>
+        <EntityType Name="LogicalTest1">
+          <Key>
+            <PropertyRef Name="LogicalTest1Id" />
+          </Key>
+          <Property Name="LogicalTest1Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Negate1" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="Operator1" Type="String" MaxLength="50" Nullable="true" />
+          <NavigationProperty Name="FactRef1" Relationship="Model1.Logicaltest1Name1" FromRole="Logicaltest1" ToRole="Name1" />
+          <NavigationProperty Name="LogicalTest2" Relationship="Model1.Logicaltest1Logicaltest2" FromRole="Logicaltest1" ToRole="Logicaltest2" />
+          <NavigationProperty Name="VulnerableConfiguration" Relationship="Model1.VulnerableconfigurationLogicaltest1" FromRole="Logicaltest1" ToRole="Vulnerableconfiguration" />
+          <Property Name="VulnerableConfigurationId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EntryReferences">
+          <End Type="Model1.Entry" Multiplicity="1" Role="Entry" />
+          <End Type="Model1.References" Multiplicity="*" Role="References" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="EntryId" />
+            </Principal>
+            <Dependent Role="References">
+              <PropertyRef Name="EntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Nvd">
+          <Key>
+            <PropertyRef Name="NvdId" />
+          </Key>
+          <Property Name="NvdId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PubDate" Type="String" Nullable="true" MaxLength="50" />
+          <NavigationProperty Name="Entry" Relationship="Model1.NvdEntry" FromRole="Nvd" ToRole="Entry" />
+        </EntityType>
+        <Association Name="NvdEntry">
+          <End Type="Model1.Nvd" Role="Nvd" Multiplicity="1" />
+          <End Type="Model1.Entry" Role="Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nvd">
+              <PropertyRef Name="NvdId" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="NvdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reference">
+          <Key>
+            <PropertyRef Name="ReferenceId" />
+          </Key>
+          <Property Name="ReferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="Href" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="200" />
+          <Property Name="Lang" Type="String" MaxLength="50" Nullable="true" />
+          <Property Name="Text" Type="String" MaxLength="200" Nullable="true" />
+          <NavigationProperty Name="References" Relationship="Model1.ReferencesReference" FromRole="Reference" ToRole="References" />
+          <Property Name="ReferencesId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ProductN" Nullable="false" MaxLength="200" annotation:StoreGeneratedPattern="None" Type="String" />
+          <NavigationProperty Name="VulnerableSoftwareList" Relationship="Model1.VulnerablesoftwarelistProduct" FromRole="Product" ToRole="Vulnerablesoftwarelist" />
+          <Property Name="VulnerableSoftwareListId" Nullable="false" Type="Int32" />
+        </EntityType>
+        <Association Name="VulnerablesoftwarelistProduct">
+          <End Type="Model1.VulnerableSoftwareList" Multiplicity="1" Role="Vulnerablesoftwarelist" />
+          <End Type="Model1.Product" Multiplicity="*" Role="Product" />
+          <ReferentialConstraint>
+            <Principal Role="Vulnerablesoftwarelist">
+              <PropertyRef Name="VulnerableSoftwareListId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="VulnerableSoftwareListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ReferencesReference">
+          <End Type="Model1.References" Role="References" Multiplicity="1" />
+          <End Type="Model1.Reference" Role="Reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="References">
+              <PropertyRef Name="ReferencesId" />
+            </Principal>
+            <Dependent Role="Reference">
+              <PropertyRef Name="ReferencesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FactRef2">
+          <Key>
+            <PropertyRef Name="FactRef2Id" />
+          </Key>
+          <Property Name="FactRef2Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Name" Nullable="false" MaxLength="200" annotation:StoreGeneratedPattern="None" Type="String" />
+          <NavigationProperty Name="LogicalTest2" Relationship="Model1.Logicaltest2Factref" FromRole="Factref" ToRole="Logicaltest2" />
+          <Property Name="LogicalTest2Id" Nullable="false" Type="Int32" />
+        </EntityType>
+        <Association Name="EntryVulnerableconfiguration">
+          <End Type="Model1.Entry" Role="Entry" Multiplicity="1" />
+          <End Type="Model1.VulnerableConfiguration" Role="Vulnerableconfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="EntryId" />
+            </Principal>
+            <Dependent Role="Vulnerableconfiguration">
+              <PropertyRef Name="EntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EntryVulnerablesoftwarelist">
+          <End Type="Model1.Entry" Role="Entry" Multiplicity="1" />
+          <End Type="Model1.VulnerableSoftwareList" Role="Vulnerablesoftwarelist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="EntryId" />
+            </Principal>
+            <Dependent Role="Vulnerablesoftwarelist">
+              <PropertyRef Name="EntryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LogicalTest2">
+          <Key>
+            <PropertyRef Name="LogicalTest2Id" />
+          </Key>
+          <Property Name="LogicalTest2Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Negate2" Nullable="true" MaxLength="50" Type="String" />
+          <Property Name="Operator2" Nullable="true" MaxLength="50" Type="String" />
+          <NavigationProperty Name="LogicalTest1" Relationship="Model1.Logicaltest1Logicaltest2" FromRole="Logicaltest2" ToRole="Logicaltest1" />
+          <Property Name="LogicalTest1Id" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="FactRef2" Relationship="Model1.Logicaltest2Factref" FromRole="Logicaltest2" ToRole="Factref" />
+        </EntityType>
+        <EntityType Name="FactRef1">
+          <Key>
+            <PropertyRef Name="FactRed1Id" />
+          </Key>
+          <Property Name="FactRed1Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Nullable="false" MaxLength="200" annotation:StoreGeneratedPattern="None" Type="String" />
+          <NavigationProperty Name="LogicalTest1" Relationship="Model1.Logicaltest1Name1" FromRole="Name1" ToRole="Logicaltest1" />
+          <Property Name="LogicalTest1Id" Nullable="false" Type="Int32" />
+        </EntityType>
+        <Association Name="Logicaltest1Name1">
+          <End Type="Model1.LogicalTest1" Multiplicity="1" Role="Logicaltest1" />
+          <End Type="Model1.FactRef1" Multiplicity="*" Role="Name1" />
+          <ReferentialConstraint>
+            <Principal Role="Logicaltest1">
+              <PropertyRef Name="LogicalTest1Id" />
+            </Principal>
+            <Dependent Role="Name1">
+              <PropertyRef Name="LogicalTest1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Logicaltest1Logicaltest2">
+          <End Type="Model1.LogicalTest1" Multiplicity="1" Role="Logicaltest1" />
+          <End Type="Model1.LogicalTest2" Multiplicity="*" Role="Logicaltest2" />
+          <ReferentialConstraint>
+            <Principal Role="Logicaltest1">
+              <PropertyRef Name="LogicalTest1Id" />
+            </Principal>
+            <Dependent Role="Logicaltest2">
+              <PropertyRef Name="LogicalTest1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Logicaltest2Factref">
+          <End Type="Model1.LogicalTest2" Multiplicity="1" Role="Logicaltest2" />
+          <End Type="Model1.FactRef2" Multiplicity="*" Role="Factref" />
+          <ReferentialConstraint>
+            <Principal Role="Logicaltest2">
+              <PropertyRef Name="LogicalTest2Id" />
+            </Principal>
+            <Dependent Role="Factref">
+              <PropertyRef Name="LogicalTest2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VulnerableconfigurationLogicaltest1">
+          <End Type="Model1.VulnerableConfiguration" Role="Vulnerableconfiguration" Multiplicity="1" />
+          <End Type="Model1.LogicalTest1" Role="Logicaltest1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vulnerableconfiguration">
+              <PropertyRef Name="VulnerableConfigurationId" />
+            </Principal>
+            <Dependent Role="Logicaltest1">
+              <PropertyRef Name="VulnerableConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container1">
+    <EntitySetMapping Name="EntrySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Entry)">
+        <MappingFragment StoreEntitySet="EntrySet">
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="LastmodifiedDateTime" ColumnName="LastmodifiedDateTime" />
+          <ScalarProperty Name="PublishedDateTime" ColumnName="PublishedDateTime" />
+          <ScalarProperty Name="NvdId" ColumnName="NvdId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferencesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.References)">
+        <MappingFragment StoreEntitySet="ReferencesSet">
+          <ScalarProperty Name="ReferencesId" ColumnName="ReferencesId" />
+          <ScalarProperty Name="Lang" ColumnName="Lang" />
+          <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VulnerableSoftwareListSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableSoftwareList)">
+        <MappingFragment StoreEntitySet="VulnerableSoftwareListSet">
+          <ScalarProperty Name="VulnerableSoftwareListId" ColumnName="VulnerableSoftwareListId" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VulnerableConfigurationSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableConfiguration)">
+        <MappingFragment StoreEntitySet="VulnerableConfigurationSet1">
+          <ScalarProperty Name="VulnerableConfigurationId" ColumnName="VulnerableConfigurationId" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogicalTest1Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.LogicalTest1)">
+        <MappingFragment StoreEntitySet="LogicalTest1Set">
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+          <ScalarProperty Name="Negate1" ColumnName="Negate1" />
+          <ScalarProperty Name="Operator1" ColumnName="Operator1" />
+          <ScalarProperty Name="VulnerableConfigurationId" ColumnName="VulnerableConfigurationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NvdSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Nvd)">
+        <MappingFragment StoreEntitySet="NvdSet">
+          <ScalarProperty Name="NvdId" ColumnName="NvdId" />
+          <ScalarProperty Name="PubDate" ColumnName="PubDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Reference)">
+        <MappingFragment StoreEntitySet="ReferenceSet">
+          <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="Lang" ColumnName="Lang" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="ReferencesId" ColumnName="ReferencesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductN" ColumnName="ProductN" />
+          <ScalarProperty Name="VulnerableSoftwareListId" ColumnName="VulnerableSoftwareListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactRef2Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.FactRef2)">
+        <MappingFragment StoreEntitySet="FactRef2Set">
+          <ScalarProperty Name="FactRef2Id" ColumnName="FactRef2Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LogicalTest2Id" ColumnName="LogicalTest2Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogicalTest2Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.LogicalTest2)">
+        <MappingFragment StoreEntitySet="LogicalTest2Set">
+          <ScalarProperty Name="LogicalTest2Id" ColumnName="LogicalTest2Id" />
+          <ScalarProperty Name="Negate2" ColumnName="Negate2" />
+          <ScalarProperty Name="Operator2" ColumnName="Operator2" />
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactRef1Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.FactRef1)">
+        <MappingFragment StoreEntitySet="FactRef1Set">
+          <ScalarProperty Name="FactRed1Id" ColumnName="FactRed1Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

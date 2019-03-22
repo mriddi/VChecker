@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container1">
+    <EntitySetMapping Name="EntrySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Entry)">
+        <MappingFragment StoreEntitySet="EntrySet">
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+          <ScalarProperty Name="LastmodifiedDateTime" ColumnName="LastmodifiedDateTime" />
+          <ScalarProperty Name="PublishedDateTime" ColumnName="PublishedDateTime" />
+          <ScalarProperty Name="NvdId" ColumnName="NvdId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferencesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.References)">
+        <MappingFragment StoreEntitySet="ReferencesSet">
+          <ScalarProperty Name="ReferencesId" ColumnName="ReferencesId" />
+          <ScalarProperty Name="Lang" ColumnName="Lang" />
+          <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VulnerableSoftwareListSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableSoftwareList)">
+        <MappingFragment StoreEntitySet="VulnerableSoftwareListSet">
+          <ScalarProperty Name="VulnerableSoftwareListId" ColumnName="VulnerableSoftwareListId" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VulnerableConfigurationSet1">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableConfiguration)">
+        <MappingFragment StoreEntitySet="VulnerableConfigurationSet1">
+          <ScalarProperty Name="VulnerableConfigurationId" ColumnName="VulnerableConfigurationId" />
+          <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogicalTest1Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.LogicalTest1)">
+        <MappingFragment StoreEntitySet="LogicalTest1Set">
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+          <ScalarProperty Name="Negate1" ColumnName="Negate1" />
+          <ScalarProperty Name="Operator1" ColumnName="Operator1" />
+          <ScalarProperty Name="VulnerableConfigurationId" ColumnName="VulnerableConfigurationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NvdSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Nvd)">
+        <MappingFragment StoreEntitySet="NvdSet">
+          <ScalarProperty Name="NvdId" ColumnName="NvdId" />
+          <ScalarProperty Name="PubDate" ColumnName="PubDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Reference)">
+        <MappingFragment StoreEntitySet="ReferenceSet">
+          <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="Lang" ColumnName="Lang" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="ReferencesId" ColumnName="ReferencesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductN" ColumnName="ProductN" />
+          <ScalarProperty Name="VulnerableSoftwareListId" ColumnName="VulnerableSoftwareListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactRef2Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.FactRef2)">
+        <MappingFragment StoreEntitySet="FactRef2Set">
+          <ScalarProperty Name="FactRef2Id" ColumnName="FactRef2Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LogicalTest2Id" ColumnName="LogicalTest2Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogicalTest2Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.LogicalTest2)">
+        <MappingFragment StoreEntitySet="LogicalTest2Set">
+          <ScalarProperty Name="LogicalTest2Id" ColumnName="LogicalTest2Id" />
+          <ScalarProperty Name="Negate2" ColumnName="Negate2" />
+          <ScalarProperty Name="Operator2" ColumnName="Operator2" />
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FactRef1Set">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.FactRef1)">
+        <MappingFragment StoreEntitySet="FactRef1Set">
+          <ScalarProperty Name="FactRed1Id" ColumnName="FactRed1Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LogicalTest1Id" ColumnName="LogicalTest1Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

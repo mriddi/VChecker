@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model3.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model3StoreContainer">
+    <EntitySet Name="SnowmanSet" EntityType="Model3.Store.SnowmanSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DiedSet" EntityType="Model3.Store.DiedSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SnowmanDied" Association="Model3.Store.SnowmanDied">
+      <End Role="Snowman" EntitySet="SnowmanSet" />
+      <End Role="Died" EntitySet="DiedSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SnowmanSet">
+    <Key>
+      <PropertyRef Name="NameId" />
+    </Key>
+    <Property Name="NameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dectription" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DiedSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Property1" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="SnowmanNameId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SnowmanDied">
+    <End Role="Snowman" Type="Model3.Store.SnowmanSet" Multiplicity="1" />
+    <End Role="Died" Type="Model3.Store.DiedSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Snowman">
+        <PropertyRef Name="NameId" />
+      </Principal>
+      <Dependent Role="Died">
+        <PropertyRef Name="SnowmanNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

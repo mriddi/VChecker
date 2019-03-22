@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model3" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model3Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SnowmanSet" EntityType="Model3.Snowman" />
+    <EntitySet Name="DiedSet" EntityType="Model3.Died" />
+    <AssociationSet Name="SnowmanDied" Association="Model3.SnowmanDied">
+      <End Role="Snowman" EntitySet="SnowmanSet" />
+      <End Role="Died" EntitySet="DiedSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Snowman">
+    <Key>
+      <PropertyRef Name="NameId" />
+    </Key>
+    <Property Name="NameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="None" />
+    <Property Name="Dectription" Type="String" Nullable="false" MaxLength="50" />
+    <NavigationProperty Name="Died" Relationship="Model3.SnowmanDied" FromRole="Snowman" ToRole="Died" />
+  </EntityType>
+  <EntityType Name="Died">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Property1" Type="String" Nullable="false" MaxLength="50" />
+    <NavigationProperty Name="Snowman" Relationship="Model3.SnowmanDied" FromRole="Died" ToRole="Snowman" />
+    <Property Name="SnowmanNameId" Type="Int32" Nullable="false" ConcurrencyMode="None" />
+  </EntityType>
+  <Association Name="SnowmanDied">
+    <End Type="Model3.Snowman" Role="Snowman" Multiplicity="1" />
+    <End Type="Model3.Died" Role="Died" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Snowman">
+        <PropertyRef Name="NameId" />
+      </Principal>
+      <Dependent Role="Died">
+        <PropertyRef Name="SnowmanNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

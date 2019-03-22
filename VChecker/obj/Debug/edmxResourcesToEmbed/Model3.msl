@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model3StoreContainer" CdmEntityContainer="Model3Container">
+    <EntitySetMapping Name="SnowmanSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model3.Snowman)">
+        <MappingFragment StoreEntitySet="SnowmanSet">
+          <ScalarProperty Name="NameId" ColumnName="NameId" />
+          <ScalarProperty Name="Dectription" ColumnName="Dectription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiedSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model3.Died)">
+        <MappingFragment StoreEntitySet="DiedSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Property1" ColumnName="Property1" />
+          <ScalarProperty Name="SnowmanNameId" ColumnName="SnowmanNameId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
