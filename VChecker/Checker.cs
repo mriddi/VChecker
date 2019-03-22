@@ -16,10 +16,24 @@ namespace VChecker
         {
             if (pathToXml != "" & pathToDb != "")
             {
-                Model1Container1 db = new Model1Container1(Checker.getConnectionString("Model1Container1", Form1.openDialog("файл данных для загрузки (*.xml)", "xml")));
+                Model1Container1 db = new Model1Container1(pathToDb);
                 Nvd nvdDeserialized = deserializeXML(pathToXml);
+     
 
-                DataTable dt = MakeTable("Kaf", new List<string> { "ProductId", "VulnerablesoftwarelistVulnerablesoftwarelistId", "ProductIdId" }, new List<Type> { System.Type.GetType("System.String"), System.Type.GetType("System.Int32"), System.Type.GetType("System.Int32") }, new List<bool> { false, false, true }, "ProductIdId");
+                List<string> Nvd = new List<string> { "NvdId" , "PubDate" };
+                List<string> Entry = new List<string> { "EntryId" , "Summary", "LastmodifiedDateTime" , "PublishedDateTime" , "NvdId" };
+                List<string> References = new List<string> { "ReferencesId", "Lang", "ReferencesType", "EntryId", "Source" };
+                List<string> Reference = new List<string> { "ReferenceId", "Href", "Lang", "Text", "ReferencesId" };
+                List<string> VulnerableSoftwareList = new List<string> { "VulnerableSoftwareList", "EntryId" };
+                List<string> Product = new List<string> { "ProductId", "ProductN" };
+                List<string> VulnerableConfiguration = new List<string> { "VulnerableConfigurationId", "EntryId" };
+                List<string> LogicalTest1 = new List<string> { "LogicalTest1Id", "Negate1" , "Operator1" , "VulnerableConfigurationId" };
+                List<string> LogicalTest2 = new List<string> { "LogicalTest2Id", "Negate2", "Operator2", "LogicalTest1Id" };
+                List<string> FactRef1 = new List<string> { "FactRef1Id", "Name", "LogicalTest1Id" };
+                List<string> FactRef2 = new List<string> { "FactRef2Id", "Name", "LogicalTest2Id" };
+
+
+                DataTable dt = MakeTable(nameof(Nvd), Nvd, new List<Type> { System.Type.GetType("System.Int32"), System.Type.GetType("System.String"), System.Type.GetType("System.Int32") }, new List<bool> { true , false, false }, "ProductId");
                 DataRow row = dt.NewRow();
 
                 foreach (Entry entry in nvdDeserialized.Entry)
@@ -29,7 +43,7 @@ namespace VChecker
                         foreach (Product product in vSoftware.Product)
                         {
                             row = dt.NewRow();
-                            row["ProductId"] = product.ProductId;
+                            row["ProductN"] = product.ProductN;
                             row["VulnerableSoftwareListId"] = product.VulnerableSoftwareListId;
                             dt.Rows.Add(row);
                         }
