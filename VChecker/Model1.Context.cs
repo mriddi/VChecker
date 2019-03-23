@@ -15,7 +15,7 @@ namespace VChecker
     
     public partial class Model1Container1 : DbContext
     {
-        public Model1Container1(string pathToDb) : base(Checker.getConnectionString("Model1Container1", pathToDb))
+        public Model1Container1() : base("name=Model1Container1")
         {
         }
     
@@ -27,13 +27,7 @@ namespace VChecker
         public virtual DbSet<Entry> EntrySet { get; set; }
         public virtual DbSet<References> ReferencesSet { get; set; }
         public virtual DbSet<VulnerableSoftwareList> VulnerableSoftwareListSet { get; set; }
-        public virtual DbSet<VulnerableConfiguration> VulnerableConfigurationSet1 { get; set; }
-        public virtual DbSet<LogicalTest1> LogicalTest1Set { get; set; }
         public virtual DbSet<Nvd> NvdSet { get; set; }
-        public virtual DbSet<Reference> ReferenceSet { get; set; }
-        public virtual DbSet<Product> ProductSet { get; set; }
-        public virtual DbSet<FactRef2> FactRef2Set { get; set; }
-        public virtual DbSet<LogicalTest2> LogicalTest2Set { get; set; }
-        public virtual DbSet<FactRef1> FactRef1Set { get; set; }
+        public virtual DbSet<VulnerableConfiguration> VulnerableConfigurationSet { get; set; }
     }
 }

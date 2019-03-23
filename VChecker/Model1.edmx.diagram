@@ -4,28 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="523b68a4955d409a9c3ccb83f537cf5f" Name="Diagram1" ZoomLevel="106" >
+      <Diagram DiagramId="523b68a4955d409a9c3ccb83f537cf5f" Name="Diagram1" ZoomLevel="113" >
         <EntityTypeShape EntityType="Model1.Entry" Width="2.125" PointX="2.875" PointY="2.125" />
         <EntityTypeShape EntityType="Model1.References" Width="1.5" PointX="6" PointY="0.5" />
-        <EntityTypeShape EntityType="Model1.VulnerableSoftwareList" Width="3.5" PointX="5.75" PointY="3.375" />
-        <EntityTypeShape EntityType="Model1.VulnerableConfiguration" Width="2.25" PointX="5.5" PointY="5.75" />
-        <EntityTypeShape EntityType="Model1.LogicalTest1" Width="3.625" PointX="9.125" PointY="5.75" />
-        <AssociationConnector Association="Model1.EntryReferences" />
-        <EntityTypeShape EntityType="Model1.Nvd" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="Model1.VulnerableSoftwareList" Width="2" PointX="9.125" PointY="2.25" />
+        <EntityTypeShape EntityType="Model1.Nvd" Width="1.5" PointX="0.625" PointY="2.125" />
+        <EntityTypeShape EntityType="Model1.VulnerableConfiguration" PointX="6" PointY="3.625" Width="2.75" />
         <AssociationConnector Association="Model1.NvdEntry" />
-        <EntityTypeShape EntityType="Model1.Reference" Width="2.5" PointX="8.75" PointY="0.875" />
-        <EntityTypeShape EntityType="Model1.Product" PointX="10.5" PointY="3.375" Width="3.375" />
-        <AssociationConnector Association="Model1.VulnerablesoftwarelistProduct" />
-        <AssociationConnector Association="Model1.ReferencesReference" />
-        <EntityTypeShape EntityType="Model1.FactRef2" PointX="16.125" PointY="9.125" Width="3.125" />
-        <AssociationConnector Association="Model1.EntryVulnerableconfiguration" />
-        <AssociationConnector Association="Model1.EntryVulnerablesoftwarelist" />
-        <EntityTypeShape EntityType="Model1.LogicalTest2" PointX="12.375" PointY="8.875" Width="3" />
-        <EntityTypeShape EntityType="Model1.FactRef1" PointX="15" PointY="5.625" Width="2.75" />
-        <AssociationConnector Association="Model1.Logicaltest1Name1" />
-        <AssociationConnector Association="Model1.Logicaltest1Logicaltest2" />
-        <AssociationConnector Association="Model1.Logicaltest2Factref" />
-        <AssociationConnector Association="Model1.VulnerableconfigurationLogicaltest1" />
+        <AssociationConnector Association="Model1.EntryReferences" />
+        <AssociationConnector Association="Model1.EntryVulnerableConfiguration" />
+        <AssociationConnector Association="Model1.EntryVulnerableSoftwareList" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

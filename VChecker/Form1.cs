@@ -41,10 +41,10 @@ namespace VChecker
 
         private void button3_Click(object sender, EventArgs e)
         {
-            foreach (string str in Checker.searchCVEforSoftware(new HashSet<string> { "juniper junos", "google chrome" }))
-            {
-                listBox2.Items.Add(str);
-            }
+            //foreach (string str in Checker.searchCVEforSoftware(new HashSet<string> { "juniper junos", "google chrome" }))
+            //{
+            //    listBox2.Items.Add(str);
+            //}
         }
 
         public static string openDialog(string textMB, string fileType)
