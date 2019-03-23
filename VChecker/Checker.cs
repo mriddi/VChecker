@@ -18,23 +18,41 @@ namespace VChecker
             {
                 Model1Container1 db = new Model1Container1(pathToDb);
                 Nvd nvdDeserialized = deserializeXML(pathToXml);
-     
 
-                List<string> Nvd = new List<string> { "NvdId" , "PubDate" };
-                List<string> Entry = new List<string> { "EntryId" , "Summary", "LastmodifiedDateTime" , "PublishedDateTime" , "NvdId" };
+
+                //List<string> Nvd = new List<string> { "NvdId", "PubDate" };
+                List<string> Entry = new List<string> { "EntryId", "Summary", "LastmodifiedDateTime", "PublishedDateTime", "NvdId" };
                 List<string> References = new List<string> { "ReferencesId", "Lang", "ReferencesType", "EntryId", "Source" };
                 List<string> Reference = new List<string> { "ReferenceId", "Href", "Lang", "Text", "ReferencesId" };
-                List<string> VulnerableSoftwareList = new List<string> { "VulnerableSoftwareList", "EntryId" };
-                List<string> Product = new List<string> { "ProductId", "ProductN" };
+                List<string> VulnerableSoftwareList = new List<string> { "VulnerableSoftwareListId", "EntryId" };
+                List<string> Product = new List<string> { "ProductId", "ProductN" , "VulnerableSoftwareListId" };
                 List<string> VulnerableConfiguration = new List<string> { "VulnerableConfigurationId", "EntryId" };
-                List<string> LogicalTest1 = new List<string> { "LogicalTest1Id", "Negate1" , "Operator1" , "VulnerableConfigurationId" };
+                List<string> LogicalTest1 = new List<string> { "LogicalTest1Id", "Negate1", "Operator1", "VulnerableConfigurationId" };
                 List<string> LogicalTest2 = new List<string> { "LogicalTest2Id", "Negate2", "Operator2", "LogicalTest1Id" };
                 List<string> FactRef1 = new List<string> { "FactRef1Id", "Name", "LogicalTest1Id" };
                 List<string> FactRef2 = new List<string> { "FactRef2Id", "Name", "LogicalTest2Id" };
 
+                DataTable dtEntry = MakeTable(nameof(Entry), Entry, new List<Type> { }, new List<bool> {true,false,false,false,false }, Entry[0]);
+                DataTable dtReferences = MakeTable(nameof(References), References, new List<Type> { }, new List<bool> {true,false,false,false,false }, References[0]);
+                DataTable dtReference = MakeTable(nameof(Reference), Reference, new List<Type> { }, new List<bool> {true,false,false,false,false }, Reference[0]);
+                DataTable dtVulnerableSoftwareList = MakeTable(nameof(VulnerableSoftwareList), VulnerableSoftwareList, new List<Type> { }, new List<bool> {true,false }, VulnerableSoftwareList[0]);
+                DataTable dtProduct = MakeTable(nameof(Product), Product, new List<Type> { System.Type.GetType("System.Int32"), System.Type.GetType("System.String") , System.Type.GetType("System.Int32") }, new List<bool> { true, false , false}, Product[0]);
+                DataTable dtVulnerableConfiguration = MakeTable(nameof(VulnerableConfiguration), VulnerableConfiguration, new List<Type> { }, new List<bool> {true,false }, VulnerableConfiguration[0]);
+                DataTable dtLogicalTest1 = MakeTable(nameof(LogicalTest1), LogicalTest1, new List<Type> { }, new List<bool> { true,false,false,false}, LogicalTest1[0]);
+                DataTable dtLogicalTest2 = MakeTable(nameof(LogicalTest2), LogicalTest2, new List<Type> { }, new List<bool> { true,false,false,false}, LogicalTest2[0]);
+                DataTable dtFactRef1 = MakeTable(nameof(FactRef1), FactRef1, new List<Type> { }, new List<bool> { true,false,false}, FactRef1[0]);
+                DataTable dtFactRef2 = MakeTable(nameof(FactRef2), FactRef2, new List<Type> { }, new List<bool> { true,false,false}, FactRef2[0]);
 
-                DataTable dt = MakeTable(nameof(Nvd), Nvd, new List<Type> { System.Type.GetType("System.Int32"), System.Type.GetType("System.String"), System.Type.GetType("System.Int32") }, new List<bool> { true , false, false }, "ProductId");
-                DataRow row = dt.NewRow();
+                DataRow rowEntry = dtEntry.NewRow();
+                DataRow rowReferences = dtReferences.NewRow();
+                DataRow rowReference = dtReference.NewRow();
+                DataRow rowVulnerableSoftwareList = dtVulnerableSoftwareList.NewRow();
+                DataRow rowProduct = dtProduct.NewRow();
+                DataRow rowVulnerableConfiguration = dtVulnerableConfiguration.NewRow();
+                DataRow rowLogicalTest1 = dtLogicalTest1.NewRow();
+                DataRow rowLogicalTest2 = dtLogicalTest2.NewRow();
+                DataRow rowFactRef1 = dtFactRef1.NewRow();
+                DataRow rowFactRef2 = dtFactRef2.NewRow();
 
                 foreach (Entry entry in nvdDeserialized.Entry)
                 {
@@ -42,16 +60,16 @@ namespace VChecker
                     {
                         foreach (Product product in vSoftware.Product)
                         {
-                            row = dt.NewRow();
-                            row["ProductN"] = product.ProductN;
-                            row["VulnerableSoftwareListId"] = product.VulnerableSoftwareListId;
-                            dt.Rows.Add(row);
+                            rowProduct = dtProduct.NewRow();
+                            rowProduct["ProductN"] = product.ProductN;
+                            rowProduct["VulnerableSoftwareListId"] = 1;
+                            dtProduct.Rows.Add(rowProduct);
                         }
                     }
                 }
-                dt.AcceptChanges();
+                dtProduct.AcceptChanges();
 
-                //pushBulk(dt, pathToDb);
+                pushBulk(dtProduct, pathToDb);
 
 
 
