@@ -124,7 +124,58 @@ namespace VChecker
                 XmlD.Nvd nvd = (XmlD.Nvd)mySerializer.Deserialize(myFileStream);
                 Nvd nvdN = new Nvd();
 
-                
+                foreach (XmlD.Entry entry in nvd.Entry)
+                {
+                    Entry entryN = new Entry();
+                    entryN.EntryId = entry.EntryId;
+                    entryN.Summary = entry.Summary;
+                    entryN.LastmodifiedDateTime = entry.LastmodifiedDateTime;
+                    entryN.PublishedDateTime = entry.PublishedDateTime;
+                    //entryN.NvdPubDate =
+                    foreach (XmlD.References references in entry.References)
+                    {
+                        foreach (XmlD.Reference reference in references.Reference)
+                        {
+                            References referencesN = new References();
+                            referencesN.Href = reference.Href;
+                            entryN.References.Add(referencesN);
+                        }
+                    }
+                    //============//
+                    foreach (XmlD.VulnerableSoftwareList vSoftwarList in entry.VulnerableSoftwareList)
+                    {
+                        foreach (XmlD.Product product in vSoftwarList.Product)
+                        {
+                            VulnerableSoftwareList vSoftwarListN = new VulnerableSoftwareList();
+                            vSoftwarListN.Product = product.ProductN;
+                            entryN.VulnerableSoftwareList.Add(vSoftwarListN);
+                        }
+                    }
+                    //============//
+                    foreach (XmlD.VulnerableConfiguration vConfiguration in entry.VulnerableConfiguration)
+                    {
+                        foreach (XmlD.LogicalTest1 lt1 in vConfiguration.LogicalTest1)
+                        {
+                            foreach (XmlD.FactRef1 fr1 in lt1.FactRef1)
+                            {
+                                VulnerableConfiguration vConfigurationN = new VulnerableConfiguration();
+                                vConfigurationN.Name = fr1.Name;
+                                entryN.VulnerableConfiguration.Add(vConfigurationN);
+                            }
+
+                            foreach (XmlD.LogicalTest2 lt2 in lt1.LogicalTest2)
+                            {
+                                foreach (XmlD.FactRef2 fr2 in lt2.FactRef2)
+                                {
+                                    VulnerableConfiguration vConfigurationN = new VulnerableConfiguration();
+                                    vConfigurationN.Name = fr2.Name;
+                                    entryN.VulnerableConfiguration.Add(vConfigurationN);
+                                }
+                            }
+                        }
+                    }
+                    nvdN.Entry.Add(entryN);
+                }
 
 
 
