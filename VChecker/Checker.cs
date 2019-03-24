@@ -121,7 +121,52 @@ namespace VChecker
             {
                 XmlSerializer mySerializer = new XmlSerializer(typeof(Nvd));
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
-                return (Nvd)mySerializer.Deserialize(myFileStream);
+                Nvd nvdDeserialized = (Nvd)mySerializer.Deserialize(myFileStream);
+
+                foreach (Entry entry in nvdDeserialized.Entry)
+                {
+                    entry.NvdId = nvdDeserialized.NvdId;
+                    foreach (References references in entry.References)
+                    {
+                        references.EntryId = entry.EntryId;
+                        foreach (Reference reference in references.Reference)
+                        {
+                            reference.ReferencesId = references.ReferencesId;
+                        }
+                    }
+                    //============//
+                    foreach (VulnerableSoftwareList vSoftwarList in entry.VulnerableSoftwareList)
+                    {
+                        vSoftwarList.EntryId = entry.EntryId;
+                        foreach (Product product in vSoftwarList.Product)
+                        {
+                            product.VulnerableSoftwareListId = vSoftwarList.VulnerableSoftwareListId;
+                        }
+                    }
+                    //============//
+                    foreach (VulnerableConfiguration vConfiguration in entry.VulnerableConfiguration)
+                    {
+                        vConfiguration.EntryId = entry.EntryId;
+                        foreach (LogicalTest1 lt1 in vConfiguration.LogicalTest1)
+                        {
+                            lt1.VulnerableConfigurationId = vConfiguration.VulnerableConfigurationId;
+                            foreach (FactRef1 fr1 in lt1.FactRef1)
+                            {
+                                fr1.LogicalTest1Id = lt1.LogicalTest1Id;
+                            }
+
+                            foreach (LogicalTest2 lt2 in lt1.LogicalTest2)
+                            {
+                                lt2.LogicalTest1Id = lt1.LogicalTest1Id;
+                                foreach (FactRef2 fr2 in lt2.FactRef2)
+                                {
+                                    fr2.LogicalTest2Id = lt2.LogicalTest2Id;
+                                }
+                            }
+                        }
+                    }
+                }
+                return nvdDeserialized;
             }
             catch { }
             return null;
