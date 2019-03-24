@@ -16,8 +16,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.References)">
         <MappingFragment StoreEntitySet="ReferencesSet">
           <ScalarProperty Name="Href" ColumnName="Href" />
-          <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
-          <ScalarProperty Name="Source" ColumnName="Source" />
           <ScalarProperty Name="EntryId" ColumnName="EntryId" />
         </MappingFragment>
       </EntityTypeMapping>

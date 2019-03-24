@@ -42,8 +42,6 @@
       <PropertyRef Name="Href" />
     </Key>
     <Property Name="Href" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="ReferenceType" Type="String" MaxLength="50" Nullable="true" />
-    <Property Name="Source" Type="String" MaxLength="50" Nullable="true" />
     <NavigationProperty Name="Entry" Relationship="Model1.EntryReferences" FromRole="References" ToRole="Entry" />
     <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
   </EntityType>

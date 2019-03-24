@@ -11,15 +11,12 @@ namespace VChecker
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Serialization;
-    [XmlRoot(ElementName = "vulnerable-configuration", Namespace = "http://scap.nist.gov/schema/vulnerability/0.4")]
+    
     public partial class VulnerableConfiguration
     {
-        [XmlElement(ElementName = "fact-ref", Namespace = "http://cpe.mitre.org/language/2.0")]
         public string Name { get; set; }
-        [XmlAttribute(AttributeName = "id")]
         public string EntryId { get; set; }
-        [XmlElement(ElementName = "entry", Namespace = "http://scap.nist.gov/schema/feed/vulnerability/2.0")]
+    
         public virtual Entry Entry { get; set; }
     }
 }

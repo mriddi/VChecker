@@ -11,19 +11,18 @@ namespace VChecker
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Serialization;
-    [XmlRoot(ElementName = "nvd", Namespace = "http://scap.nist.gov/schema/feed/vulnerability/2.0")]
+    
     public partial class Nvd
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Nvd()
         {
-            this.Entry = new List<Entry>();
+            this.Entry = new HashSet<Entry>();
         }
-        [XmlAttribute(AttributeName = "pub_date")]
+    
         public string PubDate { get; set; }
-        [XmlElement(ElementName = "entry", Namespace = "http://scap.nist.gov/schema/feed/vulnerability/2.0")]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual List<Entry> Entry { get; set; }
+        public virtual ICollection<Entry> Entry { get; set; }
     }
 }

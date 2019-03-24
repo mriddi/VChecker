@@ -119,9 +119,18 @@ namespace VChecker
         {
             try
             {
-                XmlSerializer mySerializer = new XmlSerializer(typeof(Nvd));
+                XmlSerializer mySerializer = new XmlSerializer(typeof(XmlD.Nvd));
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
-                return (Nvd)mySerializer.Deserialize(myFileStream);
+                XmlD.Nvd nvd = (XmlD.Nvd)mySerializer.Deserialize(myFileStream)
+
+                Nvd nvdN = new Nvd();
+
+
+                return nvdN;
+
+
+
+
             }
             catch { }
             return null;

@@ -43,8 +43,6 @@
       <PropertyRef Name="Href" />
     </Key>
     <Property Name="Href" Type="nvarchar" Nullable="false" MaxLength="200" />
-    <Property Name="ReferenceType" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Source" Type="nvarchar" Nullable="true" MaxLength="50" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="VulnerableSoftwareListSet">
@@ -161,8 +159,6 @@
             <PropertyRef Name="Href" />
           </Key>
           <Property Name="Href" Type="String" Nullable="false" MaxLength="200" />
-          <Property Name="ReferenceType" Type="String" MaxLength="50" Nullable="true" />
-          <Property Name="Source" Type="String" MaxLength="50" Nullable="true" />
           <NavigationProperty Name="Entry" Relationship="Model1.EntryReferences" FromRole="References" ToRole="Entry" />
           <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
         </EntityType>
@@ -258,8 +254,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model1.References)">
         <MappingFragment StoreEntitySet="ReferencesSet">
           <ScalarProperty Name="Href" ColumnName="Href" />
-          <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
-          <ScalarProperty Name="Source" ColumnName="Source" />
           <ScalarProperty Name="EntryId" ColumnName="EntryId" />
         </MappingFragment>
       </EntityTypeMapping>

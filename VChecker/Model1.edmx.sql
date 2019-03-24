@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/24/2019 01:10:06
+-- Date Created: 03/24/2019 22:04:28
 -- Generated from EDMX file: C:\Users\User\Documents\GitHub\VChecker\VChecker\Model1.edmx
 -- --------------------------------------------------
 
@@ -17,17 +17,17 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_EntryReferences]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ReferencesSet] DROP CONSTRAINT [FK_EntryReferences];
-GO
 IF OBJECT_ID(N'[dbo].[FK_NvdEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EntrySet] DROP CONSTRAINT [FK_NvdEntry];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ReferencesReference]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ReferenceSet] DROP CONSTRAINT [FK_ReferencesReference];
+IF OBJECT_ID(N'[dbo].[FK_EntryReferences]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ReferencesSet] DROP CONSTRAINT [FK_EntryReferences];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EntryVulnerablesoftwarelist]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VulnerableSoftwareListSet] DROP CONSTRAINT [FK_EntryVulnerablesoftwarelist];
+IF OBJECT_ID(N'[dbo].[FK_EntryVulnerableConfiguration]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VulnerableConfigurationSet] DROP CONSTRAINT [FK_EntryVulnerableConfiguration];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EntryVulnerableSoftwareList]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VulnerableSoftwareListSet] DROP CONSTRAINT [FK_EntryVulnerableSoftwareList];
 GO
 
 -- --------------------------------------------------
@@ -46,11 +46,8 @@ GO
 IF OBJECT_ID(N'[dbo].[NvdSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[NvdSet];
 GO
-IF OBJECT_ID(N'[dbo].[ReferenceSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ReferenceSet];
-GO
-IF OBJECT_ID(N'[dbo].[FactRef1Set]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FactRef1Set];
+IF OBJECT_ID(N'[dbo].[VulnerableConfigurationSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VulnerableConfigurationSet];
 GO
 
 -- --------------------------------------------------
@@ -70,8 +67,6 @@ GO
 -- Creating table 'ReferencesSet'
 CREATE TABLE [dbo].[ReferencesSet] (
     [Href] nvarchar(200)  NOT NULL,
-    [ReferenceType] nvarchar(50)  NULL,
-    [Source] nvarchar(50)  NULL,
     [EntryId] nvarchar(50)  NOT NULL
 );
 GO
