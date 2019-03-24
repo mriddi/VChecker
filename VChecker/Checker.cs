@@ -14,105 +14,113 @@ namespace VChecker
     {
         public static void pushNvdFromXmlToDb(string pathToXml, string pathToDb)
         {
-            //if (pathToXml != "" & pathToDb != "")
-            //{
-                //Model1Container1 db = new Model1Container1(pathToDb);
+            if (pathToXml != "" & pathToDb != "")
+            {
+                Model1Container1 db = new Model1Container1(pathToDb);
                 Nvd nvdDeserialized = deserializeXML(pathToXml);
 
+                List<string> Nvd = new List<string> { "PubDate" };
+                List<string> Entry = new List<string> { "EntryId", "Summary", "LastmodifiedDateTime", "PublishedDateTime", "NvdPubDate" };
+                List<string> References = new List<string> { "Href", "EntryId" };
+                List<string> VulnerableSoftwareList = new List<string> { "Product", "EntryId" };
+                List<string> VulnerableConfiguration = new List<string> { "Name", "EntryId" };
 
-                //List<string> Nvd = new List<string> { "NvdId", "PubDate" };
-            //    List<string> Entry = new List<string> { "EntryId", "Summary", "LastmodifiedDateTime", "PublishedDateTime", "NvdId" };
-            //    List<string> References = new List<string> { "ReferencesId", "Lang", "ReferencesType", "EntryId", "Source" };
-            //    List<string> Reference = new List<string> { "ReferenceId", "Href", "Lang", "Text", "ReferencesId" };
-            //    List<string> VulnerableSoftwareList = new List<string> { "VulnerableSoftwareListId", "EntryId" };
-            //    List<string> Product = new List<string> { "ProductId", "ProductN" , "VulnerableSoftwareListId" };
-            //    List<string> VulnerableConfiguration = new List<string> { "VulnerableConfigurationId", "EntryId" };
-            //    List<string> LogicalTest1 = new List<string> { "LogicalTest1Id", "Negate1", "Operator1", "VulnerableConfigurationId" };
-            //    List<string> LogicalTest2 = new List<string> { "LogicalTest2Id", "Negate2", "Operator2", "LogicalTest1Id" };
-            //    List<string> FactRef1 = new List<string> { "FactRef1Id", "Name", "LogicalTest1Id" };
-            //    List<string> FactRef2 = new List<string> { "FactRef2Id", "Name", "LogicalTest2Id" };
+                DataTable dtNvd= MakeTable(nameof(Nvd), Nvd, Nvd[0]);
+                DataTable dtEntry = MakeTable(nameof(Entry), Entry, Entry[0]);
+                DataTable dtReferences = MakeTable(nameof(References), References, References[0]);
+                DataTable dtVulnerableSoftwareList = MakeTable(nameof(VulnerableSoftwareList), VulnerableSoftwareList, VulnerableSoftwareList[0]);
+                DataTable dtVulnerableConfiguration = MakeTable(nameof(VulnerableConfiguration), VulnerableConfiguration, VulnerableConfiguration[0]);
 
-            //    DataTable dtEntry = MakeTable(nameof(Entry), Entry, new List<Type> { }, new List<bool> {true,false,false,false,false }, Entry[0]);
-            //    DataTable dtReferences = MakeTable(nameof(References), References, new List<Type> { }, new List<bool> {true,false,false,false,false }, References[0]);
-            //    DataTable dtReference = MakeTable(nameof(Reference), Reference, new List<Type> { }, new List<bool> {true,false,false,false,false }, Reference[0]);
-            //    DataTable dtVulnerableSoftwareList = MakeTable(nameof(VulnerableSoftwareList), VulnerableSoftwareList, new List<Type> { }, new List<bool> {true,false }, VulnerableSoftwareList[0]);
-            //    DataTable dtProduct = MakeTable(nameof(Product), Product, new List<Type> { System.Type.GetType("System.Int32"), System.Type.GetType("System.String") , System.Type.GetType("System.Int32") }, new List<bool> { true, false , false}, Product[0]);
-            //    DataTable dtVulnerableConfiguration = MakeTable(nameof(VulnerableConfiguration), VulnerableConfiguration, new List<Type> { }, new List<bool> {true,false }, VulnerableConfiguration[0]);
-            //    DataTable dtLogicalTest1 = MakeTable(nameof(LogicalTest1), LogicalTest1, new List<Type> { }, new List<bool> { true,false,false,false}, LogicalTest1[0]);
-            //    DataTable dtLogicalTest2 = MakeTable(nameof(LogicalTest2), LogicalTest2, new List<Type> { }, new List<bool> { true,false,false,false}, LogicalTest2[0]);
-            //    DataTable dtFactRef1 = MakeTable(nameof(FactRef1), FactRef1, new List<Type> { }, new List<bool> { true,false,false}, FactRef1[0]);
-            //    DataTable dtFactRef2 = MakeTable(nameof(FactRef2), FactRef2, new List<Type> { }, new List<bool> { true,false,false}, FactRef2[0]);
+                DataRow rowNvd = dtNvd.NewRow();
+                DataRow rowEntry = dtEntry.NewRow();
+                DataRow rowReferences = dtReferences.NewRow();
+                DataRow rowVulnerableSoftwareList = dtVulnerableSoftwareList.NewRow();
+                DataRow rowVulnerableConfiguration = dtVulnerableConfiguration.NewRow();
 
-            //    DataRow rowEntry = dtEntry.NewRow();
-            //    DataRow rowReferences = dtReferences.NewRow();
-            //    DataRow rowReference = dtReference.NewRow();
-            //    DataRow rowVulnerableSoftwareList = dtVulnerableSoftwareList.NewRow();
-            //    DataRow rowProduct = dtProduct.NewRow();
-            //    DataRow rowVulnerableConfiguration = dtVulnerableConfiguration.NewRow();
-            //    DataRow rowLogicalTest1 = dtLogicalTest1.NewRow();
-            //    DataRow rowLogicalTest2 = dtLogicalTest2.NewRow();
-            //    DataRow rowFactRef1 = dtFactRef1.NewRow();
-            //    DataRow rowFactRef2 = dtFactRef2.NewRow();
+                rowNvd = dtNvd.NewRow();
+                rowNvd["PubDate"] = nvdDeserialized.PubDate;
+                dtNvd.Rows.Add(rowNvd);
+                foreach (Entry entry in nvdDeserialized.Entry)
+                {
+                    rowEntry = dtEntry.NewRow();
+                    rowEntry["EntryId"] = entry.EntryId;
+                    rowEntry["Summary"] = entry.Summary;
+                    rowEntry["LastmodifiedDateTime"] = entry.LastmodifiedDateTime;
+                    rowEntry["PublishedDateTime"] = entry.PublishedDateTime;
+                    rowEntry["NvdPubDate"] = entry.NvdPubDate;
+                    dtEntry.Rows.Add(rowEntry);
+                    foreach (References references in entry.References)
+                    {
+                        rowReferences = dtReferences.NewRow();
+                        rowReferences["Href"] = references.Href;
+                        rowReferences["EntryId"] = references.EntryId;
+                        dtReferences.Rows.Add(rowReferences);
+                    }
+                    foreach (VulnerableSoftwareList vSoftware in entry.VulnerableSoftwareList)
+                    {
+                        rowVulnerableSoftwareList = dtVulnerableSoftwareList.NewRow();
+                        rowVulnerableSoftwareList["Product"] = vSoftware.Product;
+                        rowVulnerableSoftwareList["EntryId"] = vSoftware.EntryId;
+                        dtVulnerableSoftwareList.Rows.Add(rowVulnerableSoftwareList);
+                    }
+                    foreach (VulnerableConfiguration vConfiguration in entry.VulnerableConfiguration)
+                    {
+                        rowVulnerableConfiguration = dtVulnerableConfiguration.NewRow();
+                        rowVulnerableConfiguration["Name"] = vConfiguration.Name;
+                        rowVulnerableConfiguration["EntryId"] = vConfiguration.EntryId;
+                        dtVulnerableConfiguration.Rows.Add(rowVulnerableConfiguration);
+                    }
+                }
+                dtNvd.AcceptChanges();
+                rowEntry.AcceptChanges();
+                rowReferences.AcceptChanges();
+                rowVulnerableSoftwareList.AcceptChanges();
+                rowVulnerableConfiguration.AcceptChanges();
 
-            //    foreach (Entry entry in nvdDeserialized.Entry)
-            //    {
-            //        foreach (VulnerableSoftwareList vSoftware in entry.VulnerableSoftwareList)
-            //        {
-            //            foreach (Product product in vSoftware.Product)
-            //            {
-            //                rowProduct = dtProduct.NewRow();
-            //                rowProduct["ProductN"] = product.ProductN;
-            //                rowProduct["VulnerableSoftwareListId"] = 1;
-            //                dtProduct.Rows.Add(rowProduct);
-            //            }
-            //        }
-            //    }
-            //    dtProduct.AcceptChanges();
+                pushBulk(dtNvd, pathToDb);
+                pushBulk(dtEntry, pathToDb);
+                pushBulk(dtReferences, pathToDb);
+                pushBulk(dtVulnerableSoftwareList, pathToDb);
+                pushBulk(dtVulnerableConfiguration, pathToDb);
 
-            //    pushBulk(dtProduct, pathToDb);
+                //    if (db.EntrySet.Count<Entry>() != 0)
+                //    {
+                //        List<Entry> entryToAdd = new List<Entry>();
+                //        foreach (Entry entry in nvdDeserialized.Entry)
+                //        {
+                //            bool notRepeat = true;
 
-
-
-
-
-            //    if (db.EntrySet.Count<Entry>() != 0)
-            //    {
-            //        List<Entry> entryToAdd = new List<Entry>();
-            //        foreach (Entry entry in nvdDeserialized.Entry)
-            //        {
-            //            bool notRepeat = true;
-
-            //            var query = from b in db.EntrySet
-            //                        select b;
-            //            foreach (var item in query)
-            //            {
-            //                if (item.EntryId == entry.EntryId)
-            //                    notRepeat = false;
-            //            }
-            //            if (notRepeat)
-            //            {
-            //                entry.NvdId = 1;
-            //                entryToAdd.Add(entry);
-            //            }
-            //        }
-            //        if (entryToAdd.Count != 0)
-            //            db.EntrySet.AddRange(entryToAdd);
-            //    }
-            //    else
-            //    {
-            //        db.Configuration.AutoDetectChangesEnabled = false;
-            //        db.NvdSet.Add(nvdDeserialized);
-            //        db.Configuration.AutoDetectChangesEnabled = true;
-            //    }
-            //    try
-            //    {
-            //        db.SaveChanges();
-            //    }
-            //    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
-            //    {
-            //        Console.WriteLine("!!!!!!!!!!! {0}", ex);
-            //    }
-            //}
+                //            var query = from b in db.EntrySet
+                //                        select b;
+                //            foreach (var item in query)
+                //            {
+                //                if (item.EntryId == entry.EntryId)
+                //                    notRepeat = false;
+                //            }
+                //            if (notRepeat)
+                //            {
+                //                entry.NvdId = 1;
+                //                entryToAdd.Add(entry);
+                //            }
+                //        }
+                //        if (entryToAdd.Count != 0)
+                //            db.EntrySet.AddRange(entryToAdd);
+                //    }
+                //    else
+                //    {
+                //        db.Configuration.AutoDetectChangesEnabled = false;
+                //        db.NvdSet.Add(nvdDeserialized);
+                //        db.Configuration.AutoDetectChangesEnabled = true;
+                //    }
+                //    try
+                //    {
+                //        db.SaveChanges();
+                //    }
+                //    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                //    {
+                //        Console.WriteLine("!!!!!!!!!!! {0}", ex);
+                //    }
+            }
         }
 
         private static Nvd deserializeXML(string fileName)
@@ -123,6 +131,7 @@ namespace VChecker
                 FileStream myFileStream = new FileStream(fileName, FileMode.Open);
                 XmlD.Nvd nvd = (XmlD.Nvd)mySerializer.Deserialize(myFileStream);
                 Nvd nvdN = new Nvd();
+                nvdN.PubDate = nvd.PubDate;
 
                 foreach (XmlD.Entry entry in nvd.Entry)
                 {
@@ -131,13 +140,16 @@ namespace VChecker
                     entryN.Summary = entry.Summary;
                     entryN.LastmodifiedDateTime = entry.LastmodifiedDateTime;
                     entryN.PublishedDateTime = entry.PublishedDateTime;
-                    //entryN.NvdPubDate =
+                    entryN.NvdPubDate = nvdN.PubDate;
+                    entryN.Nvd = nvdN;
                     foreach (XmlD.References references in entry.References)
                     {
                         foreach (XmlD.Reference reference in references.Reference)
                         {
                             References referencesN = new References();
                             referencesN.Href = reference.Href;
+                            referencesN.EntryId = entryN.EntryId;
+                            referencesN.Entry = entryN;
                             entryN.References.Add(referencesN);
                         }
                     }
@@ -148,6 +160,8 @@ namespace VChecker
                         {
                             VulnerableSoftwareList vSoftwarListN = new VulnerableSoftwareList();
                             vSoftwarListN.Product = product.ProductN;
+                            vSoftwarListN.EntryId = entryN.EntryId;
+                            vSoftwarListN.Entry = entryN;
                             entryN.VulnerableSoftwareList.Add(vSoftwarListN);
                         }
                     }
@@ -156,11 +170,14 @@ namespace VChecker
                     {
                         foreach (XmlD.LogicalTest1 lt1 in vConfiguration.LogicalTest1)
                         {
+                            HashSet<VulnerableConfiguration> vcH = new HashSet<VulnerableConfiguration>();
                             foreach (XmlD.FactRef1 fr1 in lt1.FactRef1)
                             {
                                 VulnerableConfiguration vConfigurationN = new VulnerableConfiguration();
                                 vConfigurationN.Name = fr1.Name;
-                                entryN.VulnerableConfiguration.Add(vConfigurationN);
+                                vConfigurationN.EntryId = entryN.EntryId;
+                                vConfigurationN.Entry = entryN;
+                                vcH.Add(vConfigurationN);
                             }
 
                             foreach (XmlD.LogicalTest2 lt2 in lt1.LogicalTest2)
@@ -169,17 +186,16 @@ namespace VChecker
                                 {
                                     VulnerableConfiguration vConfigurationN = new VulnerableConfiguration();
                                     vConfigurationN.Name = fr2.Name;
-                                    entryN.VulnerableConfiguration.Add(vConfigurationN);
+                                    vConfigurationN.EntryId = entryN.EntryId;
+                                    vConfigurationN.Entry = entryN;
+                                    vcH.Add(vConfigurationN);
                                 }
                             }
+                            entryN.VulnerableConfiguration = vcH;
                         }
                     }
                     nvdN.Entry.Add(entryN);
                 }
-
-
-
-
                 return nvdN;
             }
             catch { }
@@ -260,16 +276,16 @@ namespace VChecker
                 return string.Empty;
         }
 
-        private static DataTable MakeTable(string dataTableName, List<string> columnNames, List<Type> columnTypes, List<bool> autoIncrement, string columNamePK)
+        private static DataTable MakeTable(string dataTableName, List<string> columnNames,  string columNamePK)
         {
             DataTable newDataTable = new DataTable(dataTableName);
 
             for (int i = 0; i < columnNames.Count; i++)
             {
                 DataColumn dataColumn = new DataColumn();
-                dataColumn.DataType = columnTypes[i];
+                dataColumn.DataType = System.Type.GetType("System.String");
                 dataColumn.ColumnName = columnNames[i];
-                dataColumn.AutoIncrement = autoIncrement[i];
+                dataColumn.AutoIncrement = false;
                 newDataTable.Columns.Add(dataColumn);
                 if (columnNames[i] == columNamePK)
                 {
