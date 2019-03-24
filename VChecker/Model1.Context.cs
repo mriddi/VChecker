@@ -15,7 +15,8 @@ namespace VChecker
     
     public partial class Model1Container1 : DbContext
     {
-        public Model1Container1(string pathToDb) : base(Checker.getConnectionString("Model1Container1", pathToDb))
+        public Model1Container1()
+            : base("name=Model1Container1")
         {
         }
     

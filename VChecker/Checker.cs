@@ -16,14 +16,14 @@ namespace VChecker
         {
             if (pathToXml != "" & pathToDb != "")
             {
-                Model1Container1 db = new Model1Container1(pathToDb);
+                Model1Container1 db = new Model1Container1(/*pathToDb*/);
                 Nvd nvdDeserialized = deserializeXML(pathToXml);
 
                 List<string> Nvd = new List<string> { "PubDate" };
                 List<string> Entry = new List<string> { "EntryId", "Summary", "LastmodifiedDateTime", "PublishedDateTime", "NvdPubDate" };
-                List<string> References = new List<string> { "Href", "EntryId" };
-                List<string> VulnerableSoftwareList = new List<string> { "Product", "EntryId" };
-                List<string> VulnerableConfiguration = new List<string> { "Name", "EntryId" };
+                List<string> References = new List<string> { "Id","Href", "EntryId" };
+                List<string> VulnerableSoftwareList = new List<string> { "Id", "Product", "EntryId" };
+                List<string> VulnerableConfiguration = new List<string> { "Id", "Name", "EntryId" };
 
                 DataTable dtNvd= MakeTable(nameof(Nvd), Nvd, Nvd[0]);
                 DataTable dtEntry = MakeTable(nameof(Entry), Entry, Entry[0]);
@@ -170,14 +170,13 @@ namespace VChecker
                     {
                         foreach (XmlD.LogicalTest1 lt1 in vConfiguration.LogicalTest1)
                         {
-                            HashSet<VulnerableConfiguration> vcH = new HashSet<VulnerableConfiguration>();
                             foreach (XmlD.FactRef1 fr1 in lt1.FactRef1)
                             {
                                 VulnerableConfiguration vConfigurationN = new VulnerableConfiguration();
                                 vConfigurationN.Name = fr1.Name;
                                 vConfigurationN.EntryId = entryN.EntryId;
                                 vConfigurationN.Entry = entryN;
-                                vcH.Add(vConfigurationN);
+                                entryN.VulnerableConfiguration.Add(vConfigurationN);
                             }
 
                             foreach (XmlD.LogicalTest2 lt2 in lt1.LogicalTest2)
@@ -188,10 +187,9 @@ namespace VChecker
                                     vConfigurationN.Name = fr2.Name;
                                     vConfigurationN.EntryId = entryN.EntryId;
                                     vConfigurationN.Entry = entryN;
-                                    vcH.Add(vConfigurationN);
+                                    entryN.VulnerableConfiguration.Add(vConfigurationN);
                                 }
                             }
-                            entryN.VulnerableConfiguration = vcH;
                         }
                     }
                     nvdN.Entry.Add(entryN);
@@ -285,7 +283,8 @@ namespace VChecker
                 DataColumn dataColumn = new DataColumn();
                 dataColumn.DataType = System.Type.GetType("System.String");
                 dataColumn.ColumnName = columnNames[i];
-                dataColumn.AutoIncrement = false;
+                if (columnNames[i] == "Id")
+                    dataColumn.AutoIncrement = true;
                 newDataTable.Columns.Add(dataColumn);
                 if (columnNames[i] == columNamePK)
                 {

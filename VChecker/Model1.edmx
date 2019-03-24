@@ -40,15 +40,17 @@
   </EntityType>
   <EntityType Name="ReferencesSet">
     <Key>
-      <PropertyRef Name="Href" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Href" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="VulnerableSoftwareListSet">
     <Key>
-      <PropertyRef Name="Product" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Product" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
@@ -60,8 +62,9 @@
   </EntityType>
   <EntityType Name="VulnerableConfigurationSet">
     <Key>
-      <PropertyRef Name="Name" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
@@ -156,16 +159,18 @@
         </EntityType>
         <EntityType Name="References">
           <Key>
-            <PropertyRef Name="Href" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Href" Type="String" Nullable="false" MaxLength="200" />
           <NavigationProperty Name="Entry" Relationship="Model1.EntryReferences" FromRole="References" ToRole="Entry" />
           <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="VulnerableSoftwareList">
           <Key>
-            <PropertyRef Name="Product" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Product" Nullable="false" annotation:StoreGeneratedPattern="None" Type="String" MaxLength="200" />
           <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerableSoftwareList" FromRole="VulnerableSoftwareList" ToRole="Entry" />
           <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
@@ -179,8 +184,9 @@
         </EntityType>
         <EntityType Name="VulnerableConfiguration">
           <Key>
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Nullable="false" MaxLength="200" annotation:StoreGeneratedPattern="None" Type="String" />
           <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerableConfiguration" FromRole="VulnerableConfiguration" ToRole="Entry" />
           <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
@@ -253,6 +259,7 @@
     <EntitySetMapping Name="ReferencesSet">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.References)">
         <MappingFragment StoreEntitySet="ReferencesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Href" ColumnName="Href" />
           <ScalarProperty Name="EntryId" ColumnName="EntryId" />
         </MappingFragment>
@@ -261,6 +268,7 @@
     <EntitySetMapping Name="VulnerableSoftwareListSet">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableSoftwareList)">
         <MappingFragment StoreEntitySet="VulnerableSoftwareListSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Product" ColumnName="Product" />
           <ScalarProperty Name="EntryId" ColumnName="EntryId" />
         </MappingFragment>
@@ -276,6 +284,7 @@
     <EntitySetMapping Name="VulnerableConfigurationSet">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.VulnerableConfiguration)">
         <MappingFragment StoreEntitySet="VulnerableConfigurationSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="EntryId" ColumnName="EntryId" />
         </MappingFragment>

@@ -14,6 +14,7 @@ namespace VChecker
     
     public partial class VulnerableConfiguration
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string EntryId { get; set; }
     

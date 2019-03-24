@@ -39,16 +39,18 @@
   </EntityType>
   <EntityType Name="References">
     <Key>
-      <PropertyRef Name="Href" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Href" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Entry" Relationship="Model1.EntryReferences" FromRole="References" ToRole="Entry" />
     <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="VulnerableSoftwareList">
     <Key>
-      <PropertyRef Name="Product" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Product" Nullable="false" annotation:StoreGeneratedPattern="None" Type="String" MaxLength="200" />
     <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerableSoftwareList" FromRole="VulnerableSoftwareList" ToRole="Entry" />
     <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />
@@ -62,8 +64,9 @@
   </EntityType>
   <EntityType Name="VulnerableConfiguration">
     <Key>
-      <PropertyRef Name="Name" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Nullable="false" MaxLength="200" annotation:StoreGeneratedPattern="None" Type="String" />
     <NavigationProperty Name="Entry" Relationship="Model1.EntryVulnerableConfiguration" FromRole="VulnerableConfiguration" ToRole="Entry" />
     <Property Name="EntryId" Type="String" Nullable="false" MaxLength="50" />

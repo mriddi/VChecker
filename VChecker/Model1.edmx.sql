@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/24/2019 22:04:28
+-- Date Created: 03/25/2019 00:44:42
 -- Generated from EDMX file: C:\Users\User\Documents\GitHub\VChecker\VChecker\Model1.edmx
 -- --------------------------------------------------
 
@@ -66,6 +66,7 @@ GO
 
 -- Creating table 'ReferencesSet'
 CREATE TABLE [dbo].[ReferencesSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Href] nvarchar(200)  NOT NULL,
     [EntryId] nvarchar(50)  NOT NULL
 );
@@ -73,6 +74,7 @@ GO
 
 -- Creating table 'VulnerableSoftwareListSet'
 CREATE TABLE [dbo].[VulnerableSoftwareListSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Product] nvarchar(200)  NOT NULL,
     [EntryId] nvarchar(50)  NOT NULL
 );
@@ -86,6 +88,7 @@ GO
 
 -- Creating table 'VulnerableConfigurationSet'
 CREATE TABLE [dbo].[VulnerableConfigurationSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(200)  NOT NULL,
     [EntryId] nvarchar(50)  NOT NULL
 );
@@ -101,16 +104,16 @@ ADD CONSTRAINT [PK_EntrySet]
     PRIMARY KEY CLUSTERED ([EntryId] ASC);
 GO
 
--- Creating primary key on [Href] in table 'ReferencesSet'
+-- Creating primary key on [Id] in table 'ReferencesSet'
 ALTER TABLE [dbo].[ReferencesSet]
 ADD CONSTRAINT [PK_ReferencesSet]
-    PRIMARY KEY CLUSTERED ([Href] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Product] in table 'VulnerableSoftwareListSet'
+-- Creating primary key on [Id] in table 'VulnerableSoftwareListSet'
 ALTER TABLE [dbo].[VulnerableSoftwareListSet]
 ADD CONSTRAINT [PK_VulnerableSoftwareListSet]
-    PRIMARY KEY CLUSTERED ([Product] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [PubDate] in table 'NvdSet'
@@ -119,10 +122,10 @@ ADD CONSTRAINT [PK_NvdSet]
     PRIMARY KEY CLUSTERED ([PubDate] ASC);
 GO
 
--- Creating primary key on [Name] in table 'VulnerableConfigurationSet'
+-- Creating primary key on [Id] in table 'VulnerableConfigurationSet'
 ALTER TABLE [dbo].[VulnerableConfigurationSet]
 ADD CONSTRAINT [PK_VulnerableConfigurationSet]
-    PRIMARY KEY CLUSTERED ([Name] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------

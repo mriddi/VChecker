@@ -35,15 +35,17 @@
   </EntityType>
   <EntityType Name="ReferencesSet">
     <Key>
-      <PropertyRef Name="Href" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Href" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="VulnerableSoftwareListSet">
     <Key>
-      <PropertyRef Name="Product" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Product" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
@@ -55,8 +57,9 @@
   </EntityType>
   <EntityType Name="VulnerableConfigurationSet">
     <Key>
-      <PropertyRef Name="Name" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="EntryId" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>

@@ -14,6 +14,7 @@ namespace VChecker
     
     public partial class References
     {
+        public int Id { get; set; }
         public string Href { get; set; }
         public string EntryId { get; set; }
     

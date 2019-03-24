@@ -14,6 +14,7 @@ namespace VChecker
     
     public partial class VulnerableSoftwareList
     {
+        public int Id { get; set; }
         public string Product { get; set; }
         public string EntryId { get; set; }
     
